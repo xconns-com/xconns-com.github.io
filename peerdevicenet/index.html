@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>PeerDeviceNet - Developer API</title>
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <table width="100%" bgcolor="#ccccff" border="0" cellpadding="2"
+        cellspacing="2">
+        <tbody>
+          <tr>
+            <td valign="middle" width="45%" align="right"><img style="
+                width: 72px; height: 72px;" alt="PeerDeviceNet"
+                src="router72.png"><br>
+            </td>
+            <td valign="middle" align="left">
+              <h2>PeerDeviceNet Router<br>
+              </h2>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <table style=" text-align: left; width: 100%; background-color:
+      rgb(204, 255, 255);" border="0" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr align="center">
+          <td style="vertical-align: top; background-color: rgb(204,
+            255, 255);">Introduction&nbsp;&nbsp; |&nbsp;&nbsp; <a
+              href="rmt_intent.html">Remote intenting</a>&nbsp;&nbsp;
+            |&nbsp;&nbsp; <a href="grp_comm.html">Group communication</a>&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            |&nbsp;&nbsp; <a href="dev_conn.html">Device connection</a>&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            | &nbsp; <a href="java-api/index.html">Java API</a> &nbsp;
+            | &nbsp; <a href="tutorials.html">Tutorials</a>
+            &nbsp;&nbsp; |&nbsp;&nbsp; <a
+              href="PeerDeviceNet_design.html">Architecture</a>&nbsp;&nbsp;
+
+
+
+
+
+
+            |&nbsp;&nbsp; <a href="contact.html">Contact</a> </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    PeerDeviceNet provides android runtime/api-library to set up secure
+    ad-hoc peer-peer connections among a group of devices and enabling
+    communication among them. Its typical use cases cover mobile, P2P,
+    M2M, IoT applications. <br>
+    <br>
+    Its API and protocol is very light weight, and covers peer
+    discovery, presence, membership and messaging, similar to MQTT. One
+    major difference from MQTT is that MQTT is client-server model; all
+    devices connect to server to enable communication among each other.
+    PeerDeviceNet enables direct device-device (or peer-peer)
+    connections, logically without server in between.<br>
+    <br>
+    Its API and protocol include the following primitives: <br>
+    <ul>
+      <li>network detection, connection and disconnection: when device
+        is attached to networks or detached from networks. Currently it
+        supports wifi, wifi-direct and mobile hotspot. because its
+        plugin style implementation, it is easy to add bluetooth or
+        other transport. </li>
+      <li>peer device discovery: it is designed to enable new ways of
+        peer discovery, for example, use new sensors in mobile devices.
+        On top of it we built apps using multicast, scanning QR code,
+        NFC tapping for peer discovery and connection. </li>
+      <li>peer device connection, detection of connecting peers and
+        disconnection. </li>
+      <li>membership: join/leave app specific communication groups and
+        detect peers’s join/leave. </li>
+      <li>send/receive messages thru groups.</li>
+    </ul>
+    The runtime (Router) runs as an android service in a background
+    process, while apps invoke its APIs thru AIDL, intents or messenger
+    messages.<br>
+    <br>
+    The runtime (Router) and api library have been published as two
+    jar/aar packages at MavenCentral
+    (http://search.maven.org/#search|ga|1|peerdevicenet). and you can
+    grab them thru maven or gradle as described in <a
+      href="java-api/index.html">JavaAPI doc</a>.<br>
+    <br>
+    As developers, we find mobile platforms (Android, iOS, Win8) are
+    different from traditional platforms (desktops, servers). <br>
+    <ul>
+      <li>Apps are developed as components glued together thru high
+        level communication / integration mechanisms (intents, custom
+        urls, contracts), which enables ad-hoc reuse and composition of
+        features from different apps. </li>
+      <li>Cross components API are mostly asynchronous for the
+        responsiveness of apps. </li>
+      <li>Many issues become prominent in mobile environments such as
+        power conservation, permissions to access device features,
+        network connectivity, etc..</li>
+    </ul>
+    PeerDeviceNet Router internal design and developer API are native to
+    the mobile programming model. Its simple intent API allows adding
+    remote messaging to apps without any library "gluing"; while its IDL
+    interfaces allow apps fine grained control of messaging and
+    connection.<br>
+    <br>
+    PeerDeviceNet api exposes the following three functional modules to
+    support connected mobile/P2P apps:<br>
+    <ol>
+      <li><a href="rmt_intent.html">Remote intenting</a>. intents and
+        api to enable remote start of activities and services at peer
+        devices, send remote broadcasts.<br>
+      </li>
+      <li><a href="grp_comm.html">Group communication</a>. intents and
+        api for group membership and message passing.<br>
+      </li>
+      <li><a href="dev_conn.html">Device connection</a>. intents and api
+        for network detection, peer device discovery, peer device
+        connection setup.<br>
+      </li>
+    </ol>
+    Each modules are normally supported in three levels of APIs:<br>
+    <ol>
+      <li>Intent api.&nbsp; <br>
+      </li>
+    </ol>
+    <div style="margin-left: 40px;">Intent API provides the highest
+      level of access to Router's features. To use this API, all you
+      need is to have PeerDeviceNet (Router) installed on users devices
+      to gain the runtime support. Apps send normal android intents
+      using PeerDeviceNet specific action names and pack message data as
+      intent "extra" data items with PeerDeviceNet specific keys. All
+      the PeerDeviceNet action names are defined at <a
+        href="java-api/com/xconns/peerdevicenet/Router.Intent.html">Router.Intent</a>
+      class and "extra" data keys at <a
+        href="java-api/com/xconns/peerdevicenet/Router.MsgKey.html">Router.MsgKey</a>
+      class which you get when you add the client jar file to your
+      project.<br>
+    </div>
+    <ol start="2">
+      <li>IDL api.</li>
+    </ol>
+    <div style="margin-left: 40px;">PeerDeviceNet's IDL APIs define
+      purely asynchronous methods and callbacks. To access Router
+      services thru these apis, you can use client wrapper classes <a
+        href="java-api/com/xconns/peerdevicenet/RouterConnectionClient.html">RouterConnectionClient</a>
+      and <a
+        href="java-api/com/xconns/peerdevicenet/RouterGroupClient.html">RouterGroupClient</a>
+      which also handle some common book-keeping for you. There is also
+      <a href="java-api/com/xconns/peerdevicenet/DeviceInfo.html">DeviceInfo</a>
+      class and <a
+        href="java-api/com/xconns/peerdevicenet/NetInfo.html">NetInfo</a>
+      class used at idl api which defines information about devices and
+      networks. <br>
+    </div>
+    <ol start="3">
+      <li>Messenger api.</li>
+    </ol>
+    <div style="margin-left: 40px;">Messenger API is also a high level
+      api for apps using android's standard messaging pattern
+      "Messenger". This api defines a group of PeerDeviceNet specific
+      message ids which can be used with android's Message object. Apps
+      use messengers to send message data as a bundle with data items
+      using the same key names as Intent api. All the PeerDeviceNet
+      message ids are defined at <a
+        href="java-api/com/xconns/peerdevicenet/Router.MsgId.html">Router.MsgId</a>
+      class and bundle data keys are defined in <a
+        href="java-api/com/xconns/peerdevicenet/Router.MsgKey.html">Router.MsgKey</a>
+      class.<br>
+    </div>
+  </body>
+</html>

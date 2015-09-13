@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>PeerDeviceNet - Developer Tutorials</title>
+  </head>
+  <body>
+    <div style="text-align: center;">
+      <table bgcolor="#ccccff" border="0" cellpadding="2"
+        cellspacing="2" width="100%">
+        <tbody>
+          <tr>
+            <td align="right" valign="middle" width="45%"><img style="
+                width: 72px; height: 72px;" alt="PeerDeviceNet"
+                src="router72.png"><br>
+            </td>
+            <td align="left" valign="middle">
+              <h2>Router API: Tutorials<br>
+              </h2>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <table style=" text-align: left; width: 100%; background-color:
+      rgb(204, 255, 255);" border="0" cellpadding="2" cellspacing="2">
+      <tbody>
+        <tr align="center">
+          <td style="vertical-align: top; background-color: rgb(204,
+            255, 255);"><a href="index.html">Introduction</a>&nbsp;&nbsp;
+
+
+
+
+
+
+            |&nbsp;&nbsp; <a href="rmt_intent.html">Remote intenting</a>&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+            |&nbsp;&nbsp; <a href="grp_comm.html">Group communication</a>&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            |&nbsp;&nbsp; <a href="dev_conn.html">Device connection</a>&nbsp;&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+            | &nbsp; <a href="java-api/index.html">Java API</a> &nbsp;
+            | &nbsp; Tutorials &nbsp;&nbsp; |&nbsp;&nbsp; <a
+              href="PeerDeviceNet_design.html">Architecture</a>&nbsp;&nbsp;
+
+            |&nbsp;&nbsp; <a href="contact.html">Contact</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    The following are simple descriptions of some sample apps which
+    demonstrate how to use PeerDeviceNet APIs to create connected mobile
+    apps. The source code projects of these sample apps are hosted at
+    github. Please follow the links to download them.<br>
+    <ol>
+      <li>Connector using wifi and intenting API (<a
+          href="http://github.com/peerdevicenet/sample_Connector_wifi_intent">github_project</a>)</li>
+    </ol>
+    <blockquote>This sample connector using Router's ConnectionService
+      intenting api to discover and connect to peer devices. It
+      communicates thru external wifi router or WifiDirect network setup
+      among a group of WifiDirect enabled devices.<br>
+      <br>
+      It includes Router project as a library project. So it will
+      instantiate a router service directly, running in a separate
+      process. <br>
+      <br>
+      The README file at github project web site provides more detailed
+      description.<br>
+    </blockquote>
+    <ol start="2">
+      <li>Connector using wifi and AIDL API (<a
+          href="http://github.com/peerdevicenet/sample_Connector_wifi_aidl">github_project</a>)</li>
+    </ol>
+    <blockquote>This sample connector using Router's ConnectionService
+      aidl api to discover and connect to peer devices. It communicates
+      thru external wifi router or WifiDirect network setup among a
+      group of WifiDirect enabled devices.<br>
+      <br>
+      It doesn't embed router directly, instead invokes an external
+      router's APIs embedded in another app such as
+      Connector_wifi_intent. <br>
+    </blockquote>
+    <ol start="3">
+      <li>Connector using Wifi Direct Hotspot (<a
+href="http://github.com/peerdevicenet/sample_Connector_wifidirect_hotspot">github_project</a>)</li>
+    </ol>
+    <blockquote>This sample connector using Router's ConnectionService
+      aidl api to discover and connect to peer devices. It uses android
+      WifiP2pManager to create a p2p group with the current device as
+      the group owner. This essentially creates a hotspot that can
+      accept connections from legacy wifi devices as well as other p2p
+      devices.<br>
+      <br>
+      It doesn't embed router directly, instead invokes an external
+      router's APIs embedded in another app such as
+      Connector_wifi_intent. <br>
+      <br>
+      The README file at github project web site provides more detailed
+      description.<br>
+    </blockquote>
+    <ol start="4">
+      <li>Chat (<a href="http://github.com/peerdevicenet/sample_Chat">github
+
+
+          project</a>)<br>
+      </li>
+    </ol>
+    <blockquote>This app demonstrates how to use PeerDeviceNet group
+      communication APIs to implement a simple chat app which connect
+      peer chatters directly without going thru a central server. <br>
+      PeerDeviceNet provides three kinds of APIs and this app has a
+      separate chat implementation for each API:<br>
+      <ul>
+        <li>Intenting API: ChatByIntentingActivity.java</li>
+        <li>Messenger API: ChatByMessengerActivity.java</li>
+        <li>IDL API: ChatByAidlActivity.java</li>
+      </ul>
+      ChatActivity.java defines a main menu to allow you choose a
+      specific chat implementation; and allow you start PeerDeviceNet
+      connection manager to connect your devices.<br>
+      <p>All three chat implementations will talk to each other.<br>
+        The README file at github project web site provides more
+        detailed description.<br>
+      </p>
+    </blockquote>
+    <ol start="5">
+      <li>Rotate with peers (<a
+          href="http://github.com/peerdevicenet/sample_Rotate">github
+          project</a>)</li>
+    </ol>
+    <blockquote>This sample is a slight change of android SDK example
+      TouchRotateActivity.&nbsp; The original TouchRotateActivity allows
+      you rotate a 3D cube thru touch screen.&nbsp; This sample add
+      PeerDeviceNet group communication to allow several android devices
+      rotate the cube together, a simple demo of multi-player GUI
+      applications.<br>
+      Group communication is used here to sync the state of this app at
+      connected peer devices. There are two syncing here:<br>
+      <ol>
+        <li>when a device joins the group, it will send a message
+          requesting the rotation "state" of peers already in the group;
+          after receiving responses, it will start its rotation from
+          that state.</li>
+        <li>when the user of a device rotates the cube, the app will
+          broadcast the rotation changes to all connected peers and
+          peers will change its cube's orientation accordingly.</li>
+      </ol>
+      Users can be actively rotating cubes at multiple devices
+      simultaneously and apps will broadcast rotation values to each
+      other continuously so all apps/devices will keep synced up.<br>
+      The README file at github project web site provides more detailed
+      description.<br>
+      <br>
+      <br>
+      <br>
+    </blockquote>
+  </body>
+</html>
